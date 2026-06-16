@@ -81,8 +81,7 @@ Normaliza toda a foto que entra no motor — visão clássica é sensível à pe
 - **Anomalias:** regista factualmente na secção própria, sem interpretar a causa.
 
 ## 4. REFERÊNCIA TÉCNICA
-**Stack:** Expo **SDK 54** (FIXO — arquitetura legada, `newArchEnabled: false`; a New
-Architecture é decisão consciente da v2, não do dia 1). **TypeScript**. **expo-router**.
+**Stack:** Expo **SDK 54** (FIXO). **New Architecture LIGADA** (default do 54; o 54 é a última SDK com Legacy Arch, por isso o MVP arranca já na New Arch — caminho suportado para o módulo nativo de CV da v2). **TypeScript**. **expo-router**.
 **Dev build desde o dia 1** (ads e módulos nativos não correm em Expo Go).
 
 **Estrutura de pastas:**
