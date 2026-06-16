@@ -1,0 +1,1 @@
+Fotos no filesystem via `expo-file-system` — NUNCA AsyncStorage para fotos. AsyncStorage só para estado leve. Cliente Supabase apenas para metadados. UUID gerado no device = nome do ficheiro E id da linha.

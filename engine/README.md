@@ -1,0 +1,1 @@
+Motor de medição on-device. Funções puras. `metrics/` = cada métrica isolada; `rules/` = cada regra é função pura (mede → decide se tem algo a dizer). NÃO importa de `app/`, `components/` nem do cliente Supabase. Cada regra nova exige teste unitário.
