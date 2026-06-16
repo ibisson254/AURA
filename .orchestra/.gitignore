@@ -1,0 +1,7 @@
+﻿# .orchestra/ — espaço efémero de orquestração. Estes ficheiros não vão para o repo.
+mission.md
+report.md
+patches.md
+result.md
+snapshot-before.txt
+verify-output.txt
