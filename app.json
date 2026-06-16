@@ -1,11 +1,11 @@
-﻿{
+{
   "expo": {
     "name": "aura",
     "slug": "aura",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "auratmp",
+    "scheme": "aura",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
