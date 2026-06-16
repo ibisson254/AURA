@@ -43,7 +43,13 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "25a38a03-710d-4981-b327-3be6abf97c90"
+      }
+    },
+    "owner": "ibisson"
   }
 }
-
