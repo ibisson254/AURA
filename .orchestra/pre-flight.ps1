@@ -1,4 +1,4 @@
-# pre-flight.ps1 — Captura estado "antes" no início de cada missão
+# pre-flight.ps1 - Captura estado "antes" no inicio de cada missao
 # Uso: .\.orchestra\pre-flight.ps1 -Mission "nome-da-missao"
 # Output: .orchestra\snapshot-before.txt + tag git
 
@@ -15,7 +15,7 @@ $tagName = "pre-$Mission"
 $output = @()
 $output += $separator
 $output += "PRE-FLIGHT SNAPSHOT"
-$output += "Missão: $Mission"
+$output += "Missao: $Mission"
 $output += "Data: $timestamp"
 $output += "HEAD: $headHash"
 $output += "Tag: $tagName"
@@ -25,7 +25,7 @@ $output += $separator
 $existingTag = git tag -l $tagName 2>&1
 if ($existingTag) {
     git tag -d $tagName 2>&1 | Out-Null
-    $output += "[WARN] Tag '$tagName' já existia — substituída."
+    $output += "[WARN] Tag '$tagName' ja existia - substituida."
 }
 git tag $tagName HEAD
 $output += "Tag '$tagName' criada em $headHash"
@@ -36,14 +36,14 @@ $output += "=== GIT STATUS ==="
 $gitStatus = git status --short 2>&1
 if ($gitStatus) {
     $output += $gitStatus
-    $output += "[WARN] Working tree NÃO está limpa. Considerar commit/stash antes de prosseguir."
+    $output += "[WARN] Working tree NAO esta limpa. Considerar commit/stash antes de prosseguir."
 } else {
     $output += "(working tree limpa)"
 }
 
 # 3. Unpushed commits
 $output += ""
-$output += "=== COMMITS NÃO PUSHED ==="
+$output += "=== COMMITS NAO PUSHED ==="
 $unpushed = git log origin/main..HEAD --oneline 2>&1
 if ($unpushed -and $unpushed -notmatch "fatal") {
     $output += $unpushed
@@ -57,7 +57,7 @@ $output += "=== TSC BASELINE ==="
 $tscOutput = npx tsc --noEmit 2>&1
 $errorCount = ($tscOutput | Select-String "error TS" | Measure-Object).Count
 $output += "Erros tsc: $errorCount"
-$output += "(output integral disponível via .orchestra\verify.ps1)"
+$output += "(output integral disponivel via .orchestra\verify.ps1)"
 
 # 5. Branch info
 $output += ""
