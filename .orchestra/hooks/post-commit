@@ -1,0 +1,6 @@
+#!/bin/sh
+# AURA — post-commit hook. Regenera .orchestra/snapshot.md apos CADA commit.
+# Nao cria commits (snapshot.md esta no .gitignore) -> sem loop.
+# Requer Git for Windows (corre hooks via sh) + PowerShell.
+powershell -NoProfile -ExecutionPolicy Bypass -File "./.orchestra/state.ps1" > "./.orchestra/snapshot.md" 2>/dev/null
+exit 0
