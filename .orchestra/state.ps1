@@ -1,11 +1,11 @@
-# state.ps1 — Snapshot READ-ONLY do estado do projeto AURA.
+# state.ps1 - Snapshot READ-ONLY do estado do projeto AURA.
 # Uso interativo:  .\.orchestra\state.ps1
 # Tambem usado pelo git hook post-commit (redireciona a saida para .orchestra\snapshot.md).
 # NAO altera o repo, NAO commita, NAO faz push. Usa o stream de saida (compativel com ">").
 
 $root = "E:\PROJETO AURA"
 
-Write-Output "=== SNAPSHOT AURA — $(Get-Date -Format 'yyyy-MM-dd HH:mm') ==="
+Write-Output "=== SNAPSHOT AURA - $(Get-Date -Format 'yyyy-MM-dd HH:mm') ==="
 Write-Output ""
 Write-Output "=== ARVORE / BRANCH ==="
 git -C $root rev-parse --show-toplevel
