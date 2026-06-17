@@ -35,15 +35,15 @@ Dogmas, fronteiras e regras de execução: ver `AGENTS.md` (fonte única — nã
 - **Economia de tokens:** nunca colar trajetórias do executor no Claude — só resultados.
 - **EAS é estrito (`npm ci`):** `package-lock.json` tem de estar sincronizado, senão o build falha.
 
-## Próximo passo — Missão #2 (1.ª fatia vertical)
-1. Limpar o template-exemplo do Expo (ecrã "Welcome!" em `app/(tabs)`).
-2. Captura guiada de cima → thumbnail ~200 px em background → gravar no filesystem com UUID do device.
+## Próximo passo — Missão #2 (2.ª fatia vertical)
+1. Implementação das primeiras métricas de imagem do `engine/` (contraste/brilho) e regras básicas.
+2. Renderização de cards de técnica associados (e.g., douramento).
 
 ## Riscos / em aberto
 - **C: ~52 MB livres** — libertar espaço (perigoso para o Windows).
-- **Sem remote git** + branch `master` (não `main`). Push pendente — falta criar repo remoto.
 
 ## Histórico de missões
 - **00 — bootstrap** (✅ 2026-06-17): Expo SDK 54 + New Arch + esqueleto
   engine/content/storage/components + EAS dev build validado no Redmi Note 10. expo-doctor 18/18.
-- **01 — captura→thumbnail→filesystem** (a iniciar).
+- **01 — captura→thumbnail→filesystem** (✅ 2026-06-17): Limpeza do template + 5 dependências (file-system, camera, sensors, crypto, image-manipulator) + módulo storage/ com persistência por UUID e testes + tela de captura guiada por acelerômetro e geração de thumbnail em background.
+
