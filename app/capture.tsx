@@ -51,9 +51,9 @@ export default function CaptureScreen() {
 
   const { x, y, z } = accelerometerData;
 
-  // Celular na horizontal, virado para baixo (|z| dominante e negativo)
+  // Celular na horizontal, virado para baixo (z dominante e positivo)
   // Tolerância de inclinação em X e Y: <= 0.25G
-  const isHorizontal = z < -0.85 && Math.abs(x) < 0.25 && Math.abs(y) < 0.25;
+  const isHorizontal = z > 0.85 && Math.abs(x) < 0.25 && Math.abs(y) < 0.25;
 
   const handleCapture = async () => {
     if (isCapturing || !isHorizontal || !cameraRef.current) return;
@@ -89,6 +89,7 @@ export default function CaptureScreen() {
           const thumbDest = savedPhotoUri.replace(".jpg", ".thumb.jpg");
           await FileSystem.copyAsync({ from: thumbResult.uri, to: thumbDest });
           console.log("[Capture] Thumbnail salva em background:", thumbDest);
+          console.log("[Capture] Caminhos guardados:\n - Foto: " + savedPhotoUri + "\n - Thumb: " + thumbDest);
         } catch (thumbError) {
           console.error("[Capture] Erro ao processar thumbnail em background:", thumbError);
         }
@@ -125,7 +126,7 @@ export default function CaptureScreen() {
             </Text>
             {!isHorizontal && (
               <Text style={styles.subStatusText}>
-                Incline o ecrã para baixo (z: {z.toFixed(2)})
+                Mantenha o ecrã virado para cima (z: {z.toFixed(2)})
               </Text>
             )}
           </View>
