@@ -19,3 +19,10 @@ export async function savePhoto(tempUri: string, id: string): Promise<string> {
 export function photoUri(id: string): string {
   return DIR + photoFileName(id);
 }
+
+export async function saveThumbnail(tempUri: string, id: string): Promise<string> {
+  await ensureDir();
+  const dest = photoUri(id).replace(".jpg", ".thumb.jpg");
+  await FileSystem.copyAsync({ from: tempUri, to: dest });
+  return dest;
+}

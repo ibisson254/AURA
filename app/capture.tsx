@@ -3,10 +3,9 @@ import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from "rea
 import { CameraView, useCameraPermissions } from "expo-camera";
 import { Accelerometer } from "expo-sensors";
 import { manipulateAsync, SaveFormat } from "expo-image-manipulator";
-import * as FileSystem from "expo-file-system/legacy";
 import { useRouter } from "expo-router";
 import { newPhotoId } from "../storage/ids";
-import { savePhoto } from "../storage/photos";
+import { savePhoto, saveThumbnail } from "../storage/photos";
 
 export default function CaptureScreen() {
   const router = useRouter();
@@ -86,8 +85,7 @@ export default function CaptureScreen() {
             [{ resize: { width: 200 } }],
             { compress: 0.8, format: SaveFormat.JPEG }
           );
-          const thumbDest = savedPhotoUri.replace(".jpg", ".thumb.jpg");
-          await FileSystem.copyAsync({ from: thumbResult.uri, to: thumbDest });
+          const thumbDest = await saveThumbnail(thumbResult.uri, id);
           console.log("[Capture] Thumbnail salva em background:", thumbDest);
           console.log("[Capture] Caminhos guardados:\n - Foto: " + savedPhotoUri + "\n - Thumb: " + thumbDest);
         } catch (thumbError) {
