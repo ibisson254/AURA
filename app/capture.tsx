@@ -103,53 +103,53 @@ export default function CaptureScreen() {
 
   return (
     <View style={styles.container}>
-      <CameraView style={StyleSheet.absoluteFillObject} ref={cameraRef}>
-        {/* Overlay da moldura guia */}
-        <View style={styles.overlayContainer}>
-          {/* Moldura circular/quadrada guia para o prato */}
-          <View style={[styles.guideFrame, isHorizontal ? styles.guideActive : styles.guideInactive]}>
-            <View style={styles.cornerTL} />
-            <View style={styles.cornerTR} />
-            <View style={styles.cornerBL} />
-            <View style={styles.cornerBR} />
-          </View>
+      <CameraView style={StyleSheet.absoluteFillObject} ref={cameraRef} />
+
+      {/* Overlay da moldura guia */}
+      <View style={styles.overlayContainer} pointerEvents="box-none">
+        {/* Moldura circular/quadrada guia para o prato */}
+        <View style={[styles.guideFrame, isHorizontal ? styles.guideActive : styles.guideInactive]}>
+          <View style={styles.cornerTL} />
+          <View style={styles.cornerTR} />
+          <View style={styles.cornerBL} />
+          <View style={styles.cornerBR} />
+        </View>
+      </View>
+
+      {/* Informações de Status e Controles */}
+      <View style={styles.controlsContainer}>
+        {/* Status do Acelerômetro */}
+        <View style={[styles.statusBadge, isHorizontal ? styles.badgeActive : styles.badgeInactive]}>
+          <Text style={styles.statusText}>
+            {isHorizontal ? "Alinhamento Correto ✓" : "Posicione o telemóvel na horizontal"}
+          </Text>
+          {!isHorizontal && (
+            <Text style={styles.subStatusText}>
+              Mantenha o ecrã virado para cima (z: {z.toFixed(2)})
+            </Text>
+          )}
         </View>
 
-        {/* Informações de Status e Controles */}
-        <View style={styles.controlsContainer}>
-          {/* Status do Acelerômetro */}
-          <View style={[styles.statusBadge, isHorizontal ? styles.badgeActive : styles.badgeInactive]}>
-            <Text style={styles.statusText}>
-              {isHorizontal ? "Alinhamento Correto ✓" : "Posicione o telemóvel na horizontal"}
-            </Text>
-            {!isHorizontal && (
-              <Text style={styles.subStatusText}>
-                Mantenha o ecrã virado para cima (z: {z.toFixed(2)})
-              </Text>
+        {/* Botão de Disparo */}
+        <View style={styles.actionRow}>
+          <TouchableOpacity
+            style={[styles.captureButton, (!isHorizontal || isCapturing) && styles.captureButtonDisabled]}
+            onPress={handleCapture}
+            disabled={!isHorizontal || isCapturing}
+          >
+            {isCapturing ? (
+              <ActivityIndicator color="#000000" size="small" />
+            ) : (
+              <View style={[styles.captureInner, isHorizontal ? styles.innerActive : styles.innerInactive]} />
             )}
-          </View>
-
-          {/* Botão de Disparo */}
-          <View style={styles.actionRow}>
-            <TouchableOpacity
-              style={[styles.captureButton, (!isHorizontal || isCapturing) && styles.captureButtonDisabled]}
-              onPress={handleCapture}
-              disabled={!isHorizontal || isCapturing}
-            >
-              {isCapturing ? (
-                <ActivityIndicator color="#000000" size="small" />
-              ) : (
-                <View style={[styles.captureInner, isHorizontal ? styles.innerActive : styles.innerInactive]} />
-              )}
-            </TouchableOpacity>
-          </View>
-
-          {/* Botão Cancelar */}
-          <TouchableOpacity style={styles.cancelButton} onPress={() => router.back()}>
-            <Text style={styles.cancelButtonText}>Cancelar</Text>
           </TouchableOpacity>
         </View>
-      </CameraView>
+
+        {/* Botão Cancelar */}
+        <TouchableOpacity style={styles.cancelButton} onPress={() => router.back()}>
+          <Text style={styles.cancelButtonText}>Cancelar</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   overlayContainer: {
-    flex: 1,
+    ...StyleSheet.absoluteFillObject,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "rgba(0, 0, 0, 0.3)",
