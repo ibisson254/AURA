@@ -36,14 +36,10 @@ Dogmas, fronteiras e regras de execução: ver `AGENTS.md` (fonte única — nã
 - **EAS é estrito (`npm ci`):** `package-lock.json` tem de estar sincronizado, senão o build falha.
 
 ## Próximo passo
-- **Missão 02**: hardening (filesystem novo + jest a serio)
+- **Missão 03**: primeiro motor de métrica (douramento por cor) e cards de técnica.
 
-## Dívidas técnicas (M1)
-1. **Storage legacy**: `storage` usa `expo-file-system/legacy` -> migrar para a API nova.
-2. **Ambiente de Testes**: o teste `ids.test.ts` não corre localmente por falta de `jest-expo` configurado.
-3. **UI Provisória**: a UI no `index.tsx` foi inventada para o MVP intermédio, aguardando a missão focada em UI.
-4. **Hierarquia da Câmara**: `<CameraView>` possui componentes filhos -> deve-se usar posicionamento absoluto.
-5. **Assets em falta**: falta o ícone `assets/icon.png` no projeto.
+## Dívidas técnicas (M2)
+1. **UI Provisória**: a UI no `index.tsx` foi inventada para o MVP intermédio, aguardando a missão focada em UI (antiga dívida #3).
 
 ## Riscos / em aberto
 - **C: ~52 MB livres** — libertar espaço (perigoso para o Windows).
@@ -51,5 +47,6 @@ Dogmas, fronteiras e regras de execução: ver `AGENTS.md` (fonte única — nã
 ## Histórico de missões
 - **00 — bootstrap** (✅ 2026-06-17): Expo SDK 54 + New Arch + esqueleto engine/content/storage/components + EAS dev build validado no Redmi Note 10. expo-doctor 18/18.
 - **01 — captura→thumbnail→filesystem** (✅ CONCLUÍDA): captura guiada por acelerómetro + thumbnail + gravação no filesystem, validada no device e no GitHub.
+- **02 — hardening** (✅ CONCLUÍDA): migração do filesystem para a API nova (File/Directory) + jest-expo configurado com testes reais ativos + moldura-guia removida de dentro de `<CameraView>` para overlay absoluto. Dívida #5 (ícone em falta) confirmada como falso alarme.
 
 
