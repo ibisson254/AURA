@@ -1,28 +1,32 @@
-import * as FileSystem from "expo-file-system/legacy";
+import { Directory, Paths, File } from "expo-file-system";
 import { photoFileName } from "./ids";
 
-const DIR = FileSystem.documentDirectory + "photos/";
+const photosDir = new Directory(Paths.document, "photos");
 
-async function ensureDir() {
-  const info = await FileSystem.getInfoAsync(DIR);
-  if (!info.exists) await FileSystem.makeDirectoryAsync(DIR, { intermediates: true });
+function ensureDir() {
+  if (!photosDir.exists) {
+    photosDir.create({ intermediates: true, idempotent: true });
+  }
 }
 
 // Move/copia uma foto (uri temporaria da camara) para o filesystem permanente.
 export async function savePhoto(tempUri: string, id: string): Promise<string> {
-  await ensureDir();
-  const dest = DIR + photoFileName(id);
-  await FileSystem.copyAsync({ from: tempUri, to: dest });
-  return dest;
+  ensureDir();
+  const destFile = new File(photosDir, photoFileName(id));
+  const srcFile = new File(tempUri);
+  srcFile.copy(destFile);
+  return destFile.uri;
 }
 
 export function photoUri(id: string): string {
-  return DIR + photoFileName(id);
+  const file = new File(photosDir, photoFileName(id));
+  return file.uri;
 }
 
 export async function saveThumbnail(tempUri: string, id: string): Promise<string> {
-  await ensureDir();
-  const dest = photoUri(id).replace(".jpg", ".thumb.jpg");
-  await FileSystem.copyAsync({ from: tempUri, to: dest });
-  return dest;
+  ensureDir();
+  const destFile = new File(photosDir, photoFileName(id).replace(".jpg", ".thumb.jpg"));
+  const srcFile = new File(tempUri);
+  srcFile.copy(destFile);
+  return destFile.uri;
 }
