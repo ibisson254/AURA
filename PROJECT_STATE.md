@@ -35,15 +35,21 @@ Dogmas, fronteiras e regras de execução: ver `AGENTS.md` (fonte única — nã
 - **Economia de tokens:** nunca colar trajetórias do executor no Claude — só resultados.
 - **EAS é estrito (`npm ci`):** `package-lock.json` tem de estar sincronizado, senão o build falha.
 
-## Próximo passo — Missão #2 (2.ª fatia vertical)
-1. Implementação das primeiras métricas de imagem do `engine/` (contraste/brilho) e regras básicas.
-2. Renderização de cards de técnica associados (e.g., douramento).
+## Próximo passo
+- **Missão 02**: hardening (filesystem novo + jest a serio)
+
+## Dívidas técnicas (M1)
+1. **Storage legacy**: `storage` usa `expo-file-system/legacy` -> migrar para a API nova.
+2. **Ambiente de Testes**: o teste `ids.test.ts` não corre localmente por falta de `jest-expo` configurado.
+3. **UI Provisória**: a UI no `index.tsx` foi inventada para o MVP intermédio, aguardando a missão focada em UI.
+4. **Hierarquia da Câmara**: `<CameraView>` possui componentes filhos -> deve-se usar posicionamento absoluto.
+5. **Assets em falta**: falta o ícone `assets/icon.png` no projeto.
 
 ## Riscos / em aberto
 - **C: ~52 MB livres** — libertar espaço (perigoso para o Windows).
 
 ## Histórico de missões
-- **00 — bootstrap** (✅ 2026-06-17): Expo SDK 54 + New Arch + esqueleto
-  engine/content/storage/components + EAS dev build validado no Redmi Note 10. expo-doctor 18/18.
-- **01 — captura→thumbnail→filesystem** (✅ 2026-06-17): Limpeza do template + 5 dependências (file-system, camera, sensors, crypto, image-manipulator) + módulo storage/ com persistência por UUID e testes + tela de captura guiada por acelerômetro e geração de thumbnail em background.
+- **00 — bootstrap** (✅ 2026-06-17): Expo SDK 54 + New Arch + esqueleto engine/content/storage/components + EAS dev build validado no Redmi Note 10. expo-doctor 18/18.
+- **01 — captura→thumbnail→filesystem** (✅ CONCLUÍDA): captura guiada por acelerómetro + thumbnail + gravação no filesystem, validada no device e no GitHub.
+
 
