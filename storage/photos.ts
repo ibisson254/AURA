@@ -23,6 +23,11 @@ export function photoUri(id: string): string {
   return file.uri;
 }
 
+export function thumbUri(id: string): string {
+  const file = new File(photosDir, photoFileName(id).replace(".jpg", ".thumb.jpg"));
+  return file.uri;
+}
+
 export async function saveThumbnail(tempUri: string, id: string): Promise<string> {
   ensureDir();
   const destFile = new File(photosDir, photoFileName(id).replace(".jpg", ".thumb.jpg"));
