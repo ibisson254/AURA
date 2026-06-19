@@ -36,9 +36,9 @@ Dogmas, fronteiras e regras de execução: ver `AGENTS.md` (fonte única — nã
 - **EAS é estrito (`npm ci`):** `package-lock.json` tem de estar sincronizado, senão o build falha.
 
 ## Próximo passo
-- **Missão 03**: primeiro motor de métrica (douramento por cor) e cards de técnica.
+- **Missão 04**: Motor de Regras + Cards de Técnica (Douramento como caso-piloto).
 
-## Dívidas técnicas (M2)
+## Dívidas técnicas (M3)
 1. **UI Provisória**: a UI no `index.tsx` foi inventada para o MVP intermédio, aguardando a missão focada em UI (antiga dívida #3).
 
 ## Riscos / em aberto
@@ -48,5 +48,7 @@ Dogmas, fronteiras e regras de execução: ver `AGENTS.md` (fonte única — nã
 - **00 — bootstrap** (✅ 2026-06-17): Expo SDK 54 + New Arch + esqueleto engine/content/storage/components + EAS dev build validado no Redmi Note 10. expo-doctor 18/18.
 - **01 — captura→thumbnail→filesystem** (✅ CONCLUÍDA): captura guiada por acelerómetro + thumbnail + gravação no filesystem, validada no device e no GitHub.
 - **02 — hardening** (✅ CONCLUÍDA): migração do filesystem para a API nova (File/Directory) + jest-expo configurado com testes reais ativos + moldura-guia removida de dentro de `<CameraView>` para overlay absoluto. Dívida #5 (ícone em falta) confirmada como falso alarme.
+- **03 — metric-browning** (✅ CONCLUÍDA): métrica pura de douramento/tostado (`browningFraction` em HSV) no `engine/metrics/` + testes unitários de extremos + ponte `readThumbnailPixels` no `storage/pixels.ts` + fix do icon raiz para calar o Metro.
+
 
 
