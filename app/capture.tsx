@@ -76,25 +76,16 @@ export default function CaptureScreen() {
       const savedPhotoUri = await savePhoto(photo.uri, id);
       console.log("[Capture] Foto original salva:", savedPhotoUri);
 
-      // 4. Gerar Thumbnail de ~200px em background (sem bloquear UI)
-      // Disparado de forma assíncrona
-      (async () => {
-        try {
-          const thumbResult = await manipulateAsync(
-            savedPhotoUri,
-            [{ resize: { width: 200 } }],
-            { compress: 0.8, format: SaveFormat.JPEG }
-          );
-          const thumbDest = await saveThumbnail(thumbResult.uri, id);
-          console.log("[Capture] Thumbnail salva em background:", thumbDest);
-          console.log("[Capture] Caminhos guardados:\n - Foto: " + savedPhotoUri + "\n - Thumb: " + thumbDest);
-        } catch (thumbError) {
-          console.error("[Capture] Erro ao processar thumbnail em background:", thumbError);
-        }
-      })();
+      // 4. Gerar Thumbnail de ~200px e aguardar escrita antes de navegar
+      const thumbResult = await manipulateAsync(
+        savedPhotoUri,
+        [{ resize: { width: 200 } }],
+        { compress: 0.8, format: SaveFormat.JPEG }
+      );
+      await saveThumbnail(thumbResult.uri, id);
 
-      // 5. Retornar ao ecrã inicial
-      router.back();
+      // 5. Navegar para o ecrã de resultado com o id da foto
+      router.push({ pathname: "/result", params: { id } });
     } catch (error) {
       console.error("[Capture] Erro durante a captura:", error);
       setIsCapturing(false);
