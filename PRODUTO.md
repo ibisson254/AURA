@@ -77,6 +77,27 @@ de design em duas famílias:
   douramento". Confirma que medir sobre o frame inteiro tem tetos a nomear, não a
   esconder.
 
+## ROADMAP v2+ — MELHORIAS ADITIVAS (nunca fundacionais)
+> Estas desbloqueiam produto melhor, mas **só para quem tem o hardware**, sempre
+> com fallback gracioso para a heurística base. Nunca no caminho crítico do MVP.
+
+- **Profundidade / LiDAR (decisão do dono: futuro, não agora).** Mediria
+  profundidade direta → altura real do empratamento, separação comida-vs-prato
+  quase de graça (resolveria a fenda da segmentação acima **por sensor**, sem rede
+  neural), e volume/massa real por região. **Porque fica fora do MVP:** o
+  utilizador-alvo trancado (cozinheiro em ascensão, pouco dinheiro, Android de
+  gama média — device de validação Redmi Note 10) **não tem LiDAR**; o sensor
+  existe sobretudo em iPhone/iPad Pro. Construir a métrica-âncora sobre hardware
+  que o cliente-alvo não possui é construir para o cliente errado. Além disso,
+  "topografia métrica por sensor de profundidade" já está **explicitamente FORA DO
+  MVP** no CLAUDE.md §2. Entra como bónus para devices capazes, com a heurística de
+  sombras como base universal.
+- **Reconhecimento de ingredientes (TF Lite on-device)** — v2, já previsto no
+  CLAUDE.md §2. A tag manual do MVP é o fallback E o recolhedor do dataset rotulado.
+- **Segmentação comida-vs-fundo por visão clássica** — se a resposta à fenda for
+  "frame-inteiro primeiro", a segmentação para TODOS (não só LiDAR) é o salto que
+  desbloqueia "espaço negativo da comida" e "paleta da comida".
+
 ## O QUE NÃO MUDOU (continua trancado — CLAUDE.md §2 e §9)
 Offline-first; custo-zero on-device; a foto não sai do telemóvel por defeito;
 medir-não-compreender; captura guiada como feature; tom **convite, não veredito**,
@@ -85,8 +106,22 @@ nuvem é luxo de sync pago, nunca caminho crítico.
 
 ---
 
-### PRÓXIMO PASSO
-1. O dono responde à DECISÃO PENDENTE acima (frame-inteiro vs. segmentação no MVP).
-2. O orquestrador desenha a missão `07` à volta dessa métrica — a **primeira regra
-   de design**, a substituir o douramento como caso-piloto a sério.
-3. Uma métrica de cada vez. As outras entram em fila.
+### PONTO DE RETOMA (atualizar a cada sessão)
+**Estado em:** fim da missão `06-fatia-vertical`, já em `origin/main`.
+- Pipeline câmara → thumbnail → `analyze()` → conselho+fração no ecrã: **provado no
+  device.**
+- Missões 03–06 fechadas e pushed. Douramento foi o caso-piloto; **a recentrar**
+  para métricas de design (ver acima).
+- LiDAR: decidido como **futuro/aditivo**, registado no roadmap acima.
+
+**A PRÓXIMA DECISÃO QUE DESBLOQUEIA TUDO (do dono):**
+> A 1.ª regra de design do MVP mede sobre o **frame inteiro** (enquadramento /
+> terços / equilíbrio — honesta já, sem segmentação), **ou** a **segmentação
+> comida-vs-fundo (por visão clássica)** entra no MVP como fundação?
+>
+> Recomendação do orquestrador: **frame inteiro primeiro** (menor, honesto hoje);
+> segmentação como salto de roadmap.
+
+**Depois dessa resposta:** o orquestrador desenha a missão `07` à volta dessa
+métrica — a primeira regra de **design**, a substituir o douramento como
+caso-piloto. Uma métrica de cada vez; as outras entram em fila.
